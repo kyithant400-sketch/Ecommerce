@@ -74,26 +74,21 @@ class ProductController extends Controller
     public function update(Request $request, string $id)
     {
         $product = Product::findOrFail($id);
-        
+
         $request->validate([
-            'name' => 'required|string|max:255',
-            'category_id' => 'required|exists:categories,id',
-            'price' => 'required|numeric',
+            'name' => 'required',
+            'description' => 'required',
         ]);
 
-        $data = $request->all();
+        $data = $request->except(['_token', '_method']);
 
         if ($request->hasFile('image')) {
-            if ($product->image && file_exists(public_path('uploads/products/'.$product->image))) {
-                unlink(public_path('uploads/products/'.$product->image));
-            }
-            $imageName = time() . '.' . $request->image->extension();
-            $request->image->move(public_path('uploads/products'), $imageName);
-            $data['image'] = $imageName;
+            $data['image'] = $data;
         }
 
         $product->update($data);
-        return redirect()->route('products.index')->with('success', 'Product updated successfully!');
+
+        return redirect()->route('admin.products.index')->with('success', 'Product updated successfully!');
     }
 
     /**
@@ -102,11 +97,10 @@ class ProductController extends Controller
     public function destroy(string $id)
     {
         $product = Product::findOrFail($id);
-        // ပုံဖျက်
         if ($product->image && file_exists(public_path('uploads/products/'.$product->image))) {
             unlink(public_path('uploads/products/'.$product->image));
         }
         $product->delete();
-        return redirect()->route('products.index')->with('success', 'Product deleted!');
+        return redirect()->route('admin.products.index')->with('success', 'Product deleted!');
     }
 }

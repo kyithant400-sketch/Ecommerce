@@ -1,9 +1,18 @@
 @extends('backend.layouts.master')
 @section('content')
+@if(session('error'))
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{ session('error') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
 <div class="container mt-4">
     <div class="d-flex justify-content-between mb-3">
         <h3>Category List</h3>
-        <a href="{{ route('admin.categories.create') }}" class="btn btn-primary">+ Add New</a>
+        <div>
+            <a href="{{ route('admin.categories.create') }}" class="btn btn-primary">+ Add New</a>
+            <a href="{{ route('backend.admin') }}" class="btn btn-secondary">Back</a>
+        </div>
     </div>
     
     @if(session('success'))

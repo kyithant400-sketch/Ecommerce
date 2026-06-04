@@ -11,8 +11,16 @@
                     <input type="text" name="name" class="form-control" value="{{ $product->name }}" required>
                 </div>
                 <div class="mb-3">
+                    <label>Description</label>
+                    <input type="text" name="description" class="form-control" value="{{ $product->description}}">
+                </div>
+                <div class="mb-3">
                     <label>Current Image</label><br>
-                    <img src="{{ asset('storage/'.$product->image) }}" width="100" class="mb-2">
+                    @if($product->image)
+                        <img src="{{ asset('storage/'.$product->image) }}" width="100" class="mb-2">
+                    @else
+                        <p>No image available</p>
+                    @endif
                     <input type="file" name="image" class="form-control">
                 </div>
                 <button type="submit" class="btn btn-primary">Update Product</button>

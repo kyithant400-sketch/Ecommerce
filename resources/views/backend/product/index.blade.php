@@ -3,11 +3,22 @@
 <div class="container mt-4">
     <div class="d-flex justify-content-between mb-3">
         <h3>Product Lists</h3>
-        <a href="{{ route('admin.products.create') }}" class="btn btn-primary">+ Add Product</a>
+        <div>
+            <a href="{{ route('admin.products.create') }}" class="btn btn-primary">+ Add Product</a>
+            <a href="{{ route('backend.admin') }}" class="btn btn-secondary">Back</a>
+        </div>
     </div>
     <table class="table table-bordered">
         <thead>
-            <tr><th>No</th><th>Image</th><th>Name</th><th>Category</th><th>Price</th><th>Description</th><th>Action</th></tr>
+            <tr>
+                <th>No</th>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Description</th>
+                <th>Action</th>
+            </tr>
         </thead>
         <tbody>
             @foreach($products as $product)

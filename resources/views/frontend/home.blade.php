@@ -8,10 +8,6 @@
             {{ $cat->name }}
         </a>
     @endforeach
-    
-    {{-- <a href="{{ route('cart.index') }}" class="nav-link">
-    <i class="fa fa-shopping-cart"></i><span id="cart-count" class="badge badge-pill badge-primary">{{ session('cart') ? count(session('cart')) : 0 }}</span>
-</a> --}}
 </div>
 <div class="container mt-5">
     <h2 class="text-center mb-4">{{ isset($category) ? $category->name : 'Our Products' }}</h2>

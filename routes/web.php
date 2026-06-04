@@ -28,6 +28,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
     // Product Resource Routes
     Route::resource('admin/products', ProductController::class)->names('admin.products');
+    Route::put('/admin/products/update/{id}', [ProductController::class, 'update'])->name('admin.products.update');
 
     // Orders
     Route::get('admin/orders', [App\Http\Controllers\Backend\OrderController::class, 'adminIndex'])->name('admin.orders.index');
