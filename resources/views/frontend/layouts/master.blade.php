@@ -63,7 +63,6 @@
     <script>
     function addToCart(productId) {
     $.ajax({
-        // အောက်ပါအတိုင်း URL ကို ပြင်ရေးပါ
         url: "/cart/add/" + productId, 
         method: "POST",
         data: {
@@ -71,11 +70,11 @@
         },
         success: function(response) {
             $('#cart-count').text(response.total_count); 
-            alert('ပစ္စည်းကို Cart ထဲ ထည့်ပြီးပါပြီ။');
+            alert('Added to cart complete!');
         },
         error: function(xhr) {
-            console.log(xhr.responseText); // Error ကို Console မှာ ကြည့်ပါ
-            alert('တစ်ခုခု မှားယွင်းနေပါသည်။');
+            console.log(xhr.responseText);
+            alert('Something wrong!');
         }
     });
 }

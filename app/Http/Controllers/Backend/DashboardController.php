@@ -13,19 +13,17 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $data['totalCategories'] = Category::count();
-        $data['totalProducts'] = Product::count();
-        $data['totalOrders'] = Order::count();
-        
-        $data['totalUsers'] = User::where('role', '!=', 'admin')->count(); 
+        $totalCategories = Category::count();
+        $totalProducts = Product::count();
+        $totalOrders = Order::count();
+        $totalUsers = User::where('role', '!=', 'admin')->count(); 
 
-        //Top Selling Products
-        $data['topProducts'] = Product::withCount('orders') 
-                                        ->orderBy('orders_count', 'desc')
-                                        ->take(5)
-                                        ->get();
-        
+        // Top Selling Products
+        $topProducts = Product::withCount('orders') 
+                            ->orderBy('orders_count', 'desc')
+                            ->take(5)
+                            ->get();
 
-        return view('backend.admin', $data);
+        return view('backend.admin', compact('totalCategories', 'totalProducts', 'totalOrders', 'totalUsers', 'topProducts'));
     }
 }

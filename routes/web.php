@@ -3,6 +3,7 @@
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\ProductController;
+use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\OrderController;
 use App\Http\Controllers\ProfileController;
@@ -27,6 +28,18 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
     // Product Resource Routes
     Route::resource('admin/products', ProductController::class)->names('admin.products');
+
+    // Orders
+    Route::get('admin/orders', [App\Http\Controllers\Backend\OrderController::class, 'adminIndex'])->name('admin.orders.index');
+    
+    // Users
+    Route::get('admin/users', [UserController::class, 'index'])->name('admin.users.index');
+
+    Route::delete('/admin/users/delete/{id}', [UserController::class, 'destroy'])->name('admin.users.destroy');
+
+    Route::post('admin/orders/accept/{id}', [App\Http\Controllers\Backend\OrderController::class, 'accept'])->name('admin.orders.accept');
+    Route::post('admin/orders/cancel/{id}', [App\Http\Controllers\Backend\OrderController::class, 'cancel'])->name('admin.orders.cancel');
+    Route::delete('admin/orders/destroy/{id}', [App\Http\Controllers\Backend\OrderController::class, 'destroy'])->name('admin.orders.destroy');
 });
 
 Route::middleware(['auth'])->group(function () {

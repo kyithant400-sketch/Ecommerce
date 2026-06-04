@@ -23,14 +23,15 @@
             <div class="card p-3 shadow-sm">
                 <h5>Total Orders</h5>
                 <h2>{{ $totalOrders }}</h2>
-                {{-- <a href="{{ route('admin.orders.index') }}" class="btn btn-outline-warning btn-sm mt-2">View Details</a> --}}
+                {{-- <button class="btn btn-outline-warning btn-sm mt-2" disabled>Coming Soon</button> --}}
+                <a href="{{ route('admin.orders.index') }}" class="btn btn-outline-warning btn-sm mt-2">View Details</a>
             </div>
         </div>
         <div class="col-lg-3">
             <div class="card p-3 shadow-sm">
                 <h5>Total Users</h5>
                 <h2>{{ $totalUsers }}</h2>
-                {{-- <a href="{{ route('admin.users.index') }}" class="btn btn-outline-info btn-sm mt-2">View Details</a> --}}
+                <a href="{{ route('admin.users.index') }}" class="btn btn-outline-info btn-sm mt-2">View Details</a>
             </div>
         </div>
     </div>
