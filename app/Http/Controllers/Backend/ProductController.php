@@ -14,7 +14,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::with('category')->get(); // Category နာမည်ပါ အတူယူမယ်
+        $products = Product::with('category')->paginate(10); 
         return view('backend.product.index', compact('products'));
     }
 
@@ -55,7 +55,7 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
-        //
+        
     }
 
     /**
@@ -83,9 +83,7 @@ class ProductController extends Controller
 
         $data = $request->all();
 
-        // ပုံအသစ်လဲလိုပါက
         if ($request->hasFile('image')) {
-            // ပုံဟောင်းဖျက်
             if ($product->image && file_exists(public_path('uploads/products/'.$product->image))) {
                 unlink(public_path('uploads/products/'.$product->image));
             }
