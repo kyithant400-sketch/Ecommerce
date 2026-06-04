@@ -8,6 +8,10 @@
             {{ $cat->name }}
         </a>
     @endforeach
+    
+    {{-- <a href="{{ route('cart.index') }}" class="nav-link">
+    <i class="fa fa-shopping-cart"></i><span id="cart-count" class="badge badge-pill badge-primary">{{ session('cart') ? count(session('cart')) : 0 }}</span>
+</a> --}}
 </div>
 <div class="container mt-5">
     <h2 class="text-center mb-4">{{ isset($category) ? $category->name : 'Our Products' }}</h2>
@@ -18,7 +22,9 @@
                 <div class="card-body d-flex flex-column"> <h5 class="card-title">{{ $product->name }}</h5>
                     <p class="card-text mt-auto">Price: {{ $product->price }} MMK</p> <form action="{{ route('cart.add', $product->id) }}" method="POST">
                         @csrf
-                        <button type="submit" class="btn btn-primary w-100">Add to Cart</button>
+                        <button type="button" class="btn btn-primary" onclick="addToCart({{ $product->id }})">
+                            Add to Cart
+                        </button>
                     </form>
                 </div>
             </div>

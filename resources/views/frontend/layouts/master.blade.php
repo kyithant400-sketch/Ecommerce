@@ -10,6 +10,7 @@
     <title>Minaati</title>
     <!-- Fevicon -->
     <link rel="shortcut icon" href="assets/images/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     @include('frontend.partials.css')
 </head>
 <body>
@@ -21,6 +22,9 @@
                 <img src="{{ asset('frontend/assets/images/logo.svg')}}" class="img-fluid" style="width: 100px;">
             </div>
             <div class="col-6 text-right">
+                <a href="{{ route('cart.index') }}" class="btn btn-sm btn-outline-primary"><i class="fa fa-shopping-cart"></i>
+                <span id="cart-count" class="badge badge-primary">{{ session('cart') ? count(session('cart')) : 0 }}</span>
+                </a>
                 @guest
                     <a href="{{ route('login') }}" class="btn btn-sm btn-outline-primary">Login</a>
                     <a href="{{ route('register') }}" class="btn btn-sm btn-primary">Register</a>
@@ -55,6 +59,26 @@
 	
 	@include('frontend.partials.footerbar')
 	@include('frontend.partials.js')
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+    function addToCart(productId) {
+    $.ajax({
+        // အောက်ပါအတိုင်း URL ကို ပြင်ရေးပါ
+        url: "/cart/add/" + productId, 
+        method: "POST",
+        data: {
+            _token: "{{ csrf_token() }}"
+        },
+        success: function(response) {
+            $('#cart-count').text(response.total_count); 
+            alert('ပစ္စည်းကို Cart ထဲ ထည့်ပြီးပါပြီ။');
+        },
+        error: function(xhr) {
+            console.log(xhr.responseText); // Error ကို Console မှာ ကြည့်ပါ
+            alert('တစ်ခုခု မှားယွင်းနေပါသည်။');
+        }
+    });
+}
+    </script>
 </body>
 </html>

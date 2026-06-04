@@ -16,10 +16,14 @@ class OrderController extends Controller
         $cart = session()->get('cart', []);
         return view('frontend.cart.index', compact('cart'));
     }
-
     public function checkout()
     {
-        return view('frontend.cart.checkout');
+        if (!Auth::check()) {
+            return redirect()->route('login')->with('message', 'Please login to checkout.');
+        }
+        
+        $cart = session()->get('cart', []);
+        return view('frontend.cart.checkout', compact('cart'));
     }
 
     
@@ -77,6 +81,18 @@ class OrderController extends Controller
         }
 
         session()->put('cart', $cart);
-        return redirect()->route('cart.index')->with('success', 'Product added to cart!');
+        return response()->json([
+            'message' => 'Product added to cart!',
+            'total_count' => array_sum(array_column($cart, 'quantity'))
+        ]);
+    }
+    public function remove($id)
+    {
+        $cart = session()->get('cart');
+        if (isset($cart[$id])) {
+            unset($cart[$id]);
+            session()->put('cart', $cart);
+        }
+        return redirect()->back()->with('success', 'Product removed successfully!');
     }
 }

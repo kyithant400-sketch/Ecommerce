@@ -12,7 +12,9 @@ Route::middleware(['admin.redirect'])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
 });
 Route::get('/category/{id}/products', [HomeController::class, 'categoryProducts'])->name('category.products');
-Route::post('/cart/add/{id}', [App\Http\Controllers\Frontend\OrderController::class, 'addToCart'])->name('cart.add');
+Route::post('/cart/add/{id}', [OrderController::class, 'addToCart'])->name('cart.add');
+Route::get('/cart/count', function() { return response()->json(['count' => count(session('cart', []))]);})->name('cart.count');
+Route::delete('/cart/remove/{id}', [OrderController::class, 'remove'])->name('cart.remove');
 
 Route::get('/cart', [App\Http\Controllers\Frontend\OrderController::class, 'index'])->name('cart.index');
 
