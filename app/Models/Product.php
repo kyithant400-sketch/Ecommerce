@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Review;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
@@ -18,4 +19,7 @@ class Product extends Model
     {
         return $this->belongsToMany(Order::class, 'order_details', 'product_id', 'order_id');
     }
+    public function reviews() {
+    return $this->hasMany(Review::class);
+}
 }

@@ -43,7 +43,28 @@
             </div>
         </div>
     </div>
-
+    <br>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="p-3 shadow-sm">
+                <div class="card-header ">Total Income</div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ number_format($totalIncome) }} MMK</h5>
+                    <p class="card-text">Accepted Orders Only</p>
+                </div>
+            </div>
+        </div>
+    
+        <div class="col-md-6">
+            <div class="p-3 shadow-sm">
+                <div class="card-header">This Month Income</div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ number_format($monthlyIncome) }} MMK</h5>
+                    <p class="card-text">Accepted Orders Only</p>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row mt-4">
         <div class="col-lg-12">
             <div class="card p-3">
@@ -61,5 +82,7 @@
             </div>
         </div>
     </div>
+    <br>
 </div>
+
 @endsection

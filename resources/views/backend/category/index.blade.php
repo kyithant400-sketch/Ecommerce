@@ -23,13 +23,14 @@
 
     <table class="table table-bordered">
         <thead>
-            <tr><th>No</th><th>Name</th><th>Action</th></tr>
+            <tr><th>No</th><th>Name</th><th>Product's Quantity</th><th>Action</th></tr>
         </thead>
         <tbody>
             @foreach($categories as $category)
             <tr>
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $category->name }}</td>
+                <td>{{ $category->products_count }}</td>
                 <td>
                     @can('category.edit')
                     <a href="{{ route('admin.categories.edit', $category->id) }}" class="btn btn-sm btn-warning">Edit</a>

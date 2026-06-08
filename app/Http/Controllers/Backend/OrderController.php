@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -36,7 +37,15 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $total = 0;
+    foreach(session('cart') as $item) {
+        $total += $item['price'] * $item['quantity'];
+    }
+    $order = \App\Models\Order::create([
+        'user_id' => Auth::id(),
+        'total_price' => $total,
+        'status' => 'pending'
+    ]);
     }
 
     /**

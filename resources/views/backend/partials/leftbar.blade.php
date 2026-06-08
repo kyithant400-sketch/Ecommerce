@@ -36,7 +36,12 @@
                                 <i class="ri-store-2-fill"></i><span>Role</span>
                             </a>
                             @endcan
-                        </li>                                     
+                        </li>  
+                        <li>
+                            <a href="{{ route('admin.reviews.index') }}">
+                                <i class="fa fa-envelope"></i><span>Review</span>
+                            </a>
+                        </li>                                    
                     </ul>
                 </div>
                 <!-- End Navigationbar -->

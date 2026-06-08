@@ -22,6 +22,7 @@
                     <textarea name="address" class="form-control" rows="3" required></textarea>
                 </div>
                 <button type="submit" class="btn btn-success btn-lg">Place Order</button>
+            <a href="{{route('cart.index')}}" class="btn btn-danger btn-lg">Back</a>
             </form>
         </div>
 

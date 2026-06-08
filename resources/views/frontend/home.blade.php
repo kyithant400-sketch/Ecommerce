@@ -15,10 +15,13 @@
     <div class="row">
         @foreach($products as $product)
         <div class="col-md-3 d-flex"> <div class="card mb-4 w-100 shadow-sm"> <img src="{{ asset('storage/'.$product->image) }}" class="card-img-top custom-product-img" alt="...">
-                <div class="card-body d-flex flex-column"> <h5 class="card-title">{{ $product->name }}</h5>
-                    <p class="card-text mt-auto">Price: {{ $product->price }} MMK</p> <form action="{{ route('cart.add', $product->id) }}" method="POST">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">{{ $product->name }}</h5>
+                    <p class="card-text mt-auto">Price: {{ $product->price }} MMK</p> 
+                    <a href="{{ route('products.show', $product->id) }}" class="btn btn-info btn-sm w-100 mb-2">View Details</a>
+                    <form id="cart-form-{{ $product->id }}">
                         @csrf
-                        <button type="button" class="btn btn-primary" onclick="addToCart({{ $product->id }})">
+                        <button type="button" class="btn btn-success w-100" onclick="addToCart({{ $product->id }})">
                             Add to Cart
                         </button>
                     </form>
@@ -45,5 +48,23 @@
     .card {
         display: flex;
         flex-direction: column;
+    }
+
+    .star-rating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    gap: 5px;
+    }
+    .star-rating input { display: none; }
+    .star-rating label {
+        font-size: 25px;
+        color: #ccc;
+        cursor: pointer;
+    }
+    .star-rating input:checked ~ label,
+    .star-rating label:hover,
+    .star-rating label:hover ~ label {
+        color: #f39c12;
     }
 </style>

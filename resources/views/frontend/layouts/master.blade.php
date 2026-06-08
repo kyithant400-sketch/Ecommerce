@@ -62,22 +62,26 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
     function addToCart(productId) {
-    $.ajax({
-        url: "/cart/add/" + productId, 
-        method: "POST",
-        data: {
-            _token: "{{ csrf_token() }}"
-        },
-        success: function(response) {
-            $('#cart-count').text(response.total_count); 
-            alert('Added to cart complete!');
-        },
-        error: function(xhr) {
-            console.log(xhr.responseText);
-            alert('Something wrong!');
-        }
-    });
-}
+        $.ajax({
+            url: "/cart/add/" + productId, 
+            method: "POST",
+            data: {
+                _token: "{{ csrf_token() }}"
+            },
+            success: function(response) {
+                $('#cart-count').text(response.total_count); 
+                alert('Added to cart complete!');
+            },
+            error: function(xhr) {
+                alert('Something wrong!');
+            }
+        });
+    }
     </script>
 </body>
+@if(session('success'))
+    <script>
+        alert("{{ session('success') }}");
+    </script>
+@endif
 </html>

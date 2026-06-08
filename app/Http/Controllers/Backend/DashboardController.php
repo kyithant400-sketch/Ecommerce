@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\User;
+use Carbon\Carbon;
 //use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -24,6 +25,14 @@ class DashboardController extends Controller
                             ->take(5)
                             ->get();
 
-        return view('backend.admin', compact('totalCategories', 'totalProducts', 'totalOrders', 'totalUsers', 'topProducts'));
+        $totalIncome = Order::where('status', 'completed')
+                                 ->where('total_price', '>', 0)
+                                 ->sum('total_price');
+
+        $monthlyIncome = Order::where('status', 'completed')
+                                 ->whereMonth('created_at', Carbon::now()->month)
+                                 ->whereYear('created_at', Carbon::now()->year)
+                                 ->sum('total_price');
+        return view('backend.admin', compact('totalCategories', 'totalProducts', 'totalOrders', 'totalUsers', 'topProducts', 'totalIncome', 'monthlyIncome'));
     }
 }

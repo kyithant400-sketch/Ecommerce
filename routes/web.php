@@ -19,6 +19,11 @@ Route::get('/cart/count', function() { return response()->json(['count' => count
 Route::delete('/cart/remove/{id}', [FrontendOrderController::class, 'remove'])->name('cart.remove');
 Route::get('/cart', [FrontendOrderController::class, 'index'])->name('cart.index');
 
+Route::post('/products/{product}/reviews', [App\Http\Controllers\Frontend\ReviewController::class, 'store'])
+     ->name('reviews.store')->middleware('auth');
+
+Route::get('/products/{product}', [App\Http\Controllers\Frontend\ProductController::class, 'show'])->name('products.show');
+
 // --- Authenticated User Routes (Customers) ---
 Route::middleware(['auth'])->group(function () {
     Route::get('/checkout', [FrontendOrderController::class, 'checkout'])->name('checkout');
@@ -48,5 +53,7 @@ Route::middleware(['auth', 'permission:access admin'])->prefix('admin')->name('a
     Route::post('orders/accept/{id}', [BackendOrderController::class, 'accept'])->name('orders.accept');
     Route::post('orders/cancel/{id}', [BackendOrderController::class, 'cancel'])->name('orders.cancel');
     Route::delete('orders/destroy/{id}', [BackendOrderController::class, 'destroy'])->name('orders.destroy');
+
+    Route::get('/reviews', [App\Http\Controllers\Backend\ReviewController::class, 'index'])->name('reviews.index');
 });
 require __DIR__.'/auth.php';
