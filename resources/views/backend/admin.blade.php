@@ -9,14 +9,18 @@
             <div class="card p-3 shadow-sm">
                 <h5>Total Categories</h5>
                 <h2>{{ $totalCategories }}</h2>
+                @can('category.index')
                 <a href="{{ route('admin.categories.index') }}" class="btn btn-outline-primary btn-sm mt-2">View Details</a>
+                @endcan
             </div>
         </div>
         <div class="col-lg-3">
             <div class="card p-3 shadow-sm">
                 <h5>Total Products</h5>
                 <h2>{{ $totalProducts }}</h2>
+                @can('product.index')
                 <a href="{{ route('admin.products.index') }}" class="btn btn-outline-success btn-sm mt-2">View Details</a>
+                @endcan
             </div>
         </div>
         <div class="col-lg-3">
@@ -24,14 +28,18 @@
                 <h5>Total Orders</h5>
                 <h2>{{ $totalOrders }}</h2>
                 {{-- <button class="btn btn-outline-warning btn-sm mt-2" disabled>Coming Soon</button> --}}
+                @can('order.index')
                 <a href="{{ route('admin.orders.index') }}" class="btn btn-outline-warning btn-sm mt-2">View Details</a>
+                @endcan
             </div>
         </div>
         <div class="col-lg-3">
             <div class="card p-3 shadow-sm">
                 <h5>Total Users</h5>
                 <h2>{{ $totalUsers }}</h2>
+                @can('user.index')
                 <a href="{{ route('admin.users.index') }}" class="btn btn-outline-info btn-sm mt-2">View Details</a>
+                @endcan
             </div>
         </div>
     </div>

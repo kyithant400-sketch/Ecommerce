@@ -19,7 +19,6 @@ class HomeController extends Controller
     public function categoryProducts($id)
     {
         $category = Category::findOrFail($id);
-        // Category အလိုက် Product များကိုလည်း pagination သုံးပေးပါ
         $products = Product::where('category_id', $id)->paginate(8); 
         
         return view('frontend.home', compact('products', 'category'));

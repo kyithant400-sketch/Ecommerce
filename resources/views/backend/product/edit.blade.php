@@ -15,6 +15,15 @@
                     <input type="text" name="description" class="form-control" value="{{ $product->description}}">
                 </div>
                 <div class="mb-3">
+                    <label>Category</label>
+                    <select name="category_id" class="form-control" required>
+                        <option value="">Select Category</option>
+                        @foreach($categories as $category)
+                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="mb-3">
                     <label>Current Image</label><br>
                     @if($product->image)
                         <img src="{{ asset('storage/'.$product->image) }}" width="100" class="mb-2">

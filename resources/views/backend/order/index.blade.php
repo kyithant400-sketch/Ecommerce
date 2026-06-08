@@ -4,7 +4,7 @@
     <div class="d-flex justify-content-between align-items-center mb-3">
     <h2>All Orders</h2>
     
-    <a href="{{ route('home') }}" class="btn btn-info">Back</a>
+    <a href="{{ route('admin.dashboard') }}" class="btn btn-info">Back</a>
 </div>
     <table class="table">
         <thead>
@@ -38,16 +38,23 @@
                 <td>
                     <form action="{{ route('admin.orders.accept', $order->id) }}" method="POST" class="d-inline">
                         @csrf
+                        @can('order.accept')
                         <button type="submit" class="btn btn-sm btn-success">Accept</button>
+                        @endcan
                     </form>
 
                     <form action="{{ route('admin.orders.cancel', $order->id) }}" method="POST" class="d-inline">
                         @csrf
+                        @can('order.cancle')
                         <button type="submit" class="btn btn-sm btn-warning" onclick="return confirm('Are you sure?')">Cancel</button>
+                        @endcan
                     </form>
                     <form action="{{ route('admin.orders.destroy', $order->id) }}" method="POST" class="d-inline">
                         @csrf
-                        @method('DELETE') <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this order?')">Delete</button>
+                        @method('DELETE') 
+                        @can('order.delete')
+                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this order?')">Delete</button>
+                        @endcan
                     </form>
                 </td>
             </tr>

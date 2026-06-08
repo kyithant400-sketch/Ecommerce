@@ -4,8 +4,10 @@
     <div class="d-flex justify-content-between mb-3">
         <h3>Product Lists</h3>
         <div>
+            @can('product.create')
             <a href="{{ route('admin.products.create') }}" class="btn btn-primary">+ Add Product</a>
-            <a href="{{ route('backend.admin') }}" class="btn btn-secondary">Back</a>
+            @endcan
+            <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary">Back</a>
         </div>
     </div>
     <table class="table table-bordered">
@@ -35,7 +37,9 @@
                     <a href="{{ route('admin.products.edit', $product->id) }}" class="btn btn-sm btn-warning">Edit</a>
                     <form action="{{ route('admin.products.destroy', $product->id) }}" method="POST" class="d-inline">
                         @csrf @method('DELETE')
+                        @can('product.delete')
                         <button class="btn btn-sm btn-danger">Delete</button>
+                        @endcan
                     </form>
                 </td>
             </tr>

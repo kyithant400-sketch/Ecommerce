@@ -30,8 +30,8 @@
                                 <h4 class="page-title">Admin</h4>
                                 <div class="breadcrumb-list">
                                     <ol class="breadcrumb">
-                                        <li class="breadcrumb-item"><a href="{{ route('backend.admin') }}">Home</a></li>
-                                        <li class="breadcrumb-item"><a href="{{ route ('backend.admin') }}">Dashboard</a></li>
+                                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
+                                        <li class="breadcrumb-item"><a href="{{ route ('admin.dashboard') }}">Dashboard</a></li>
                                         <li class="breadcrumb-item active" aria-current="page">Admin</li>
                                     </ol>
                                 </div>
